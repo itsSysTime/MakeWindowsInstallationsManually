@@ -79,9 +79,8 @@ format fs=FAT32 [quick]
 set id=c12a7328-f81f-11d2-ba4b-00a0c93ec93b override
 ```
 ### Step 2. Staging installation files
-This part may be slightly different. Before mounting install.wim, if install.wim is over 4GB on a FAT32 partition, you need to copy it to a temporary directory and split it using DISM:
-`dism.exe /Split-Image /ImageFile:[path to install.wim] /SWMFile:[parent directory of install.wim, which is \sources\]\install.swm /FileSize:4000`
-And then mount the ISO, but remove install.wim and replace with the install*.swm files that were created.
+This part may be slightly different. Before copying installation files and after mounting the ISO, if install.wim is over 4GB on a FAT32 partition, you need to copy it to a temporary directory and split it using DISM:
+`dism.exe /Split-Image /ImageFile:[path to install.wim] /SWMFile:[parent directory of install.wim, which is \sources\]\install.swm /FileSize:4000`, but copy the ISO's files/contents recursively similar to the MBR/BIOS path, but remove install.wim from your USB drive and replace it with the install*.swm files that were created.
 
 ### Step 3. Continue with the EFI System Partition
 We need to mount our ESP in order to actually access it.
